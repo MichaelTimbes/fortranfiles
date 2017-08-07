@@ -1,0 +1,431 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{amsmath}
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{FORTRAN} % Load FORTRAN syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=FORTRAN, % Use FORTRAN in this template
+        frame=single, % Single frame around code        
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a FORTRAN script, the first parameter is the filename of the script (without .f95), the second parameter is the caption
+\newcommand{\fscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.f95}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Assignment\ Linear Systems 2} % Assignment title
+\newcommand{\hmwkDueDate}{Wed.,\ November\ 16,\ 2016} % Due date
+\newcommand{\hmwkClass}{Math\ 4670} % Course/class
+\newcommand{\hmwkClassTime}{9:05am} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Glunt} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Michael Timbes} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+%Listing \ref{a2p1} shows a FORTRAN script.
+\subsection{A}
+To iterate Jacobi's method it is important to understand where it comes from. A matrix can be broken down into three main components, the upper triangle, lower triangle, and diagonal matrix. If the problem is solve a linear system of equations, the form is usually
+\begin{equation}
+Ax=b.
+\end{equation}
+Where A is a matrix and b are the solutions to the equations that are used to help find x values that satisfy the equations. When breaking apart the matrices the results are three separate matrices that when added together still result in the original A matrix. \newline
+$A=
+\begin{array}{ccc}
+a_{11} & a_{12}&a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{array}$
+$,U=
+\begin{array}{ccc}
+0 & a_{12}&a_{13} \\
+0 & 0 & a_{23} \\
+0 & 0 & 0
+\end{array}$
+$,L=
+\begin{array}{ccc}
+0& 0&0 \\
+a_{21} &0 & 0 \\
+a_{31} & a_{32} & 0
+\end{array}$
+$,D=
+\begin{array}{ccc}
+a_{11} & 0&0 \\
+0 & a_{22} &0 \\
+0 & 0 & a_{33}
+\end{array}$
+\newline
+From these components, the following form of the linear system of equations is derived
+\begin{equation}
+(D+L+U)(x)=b. 
+\end{equation}
+Solving for x and considering that normally the matrices that work well with Jacobi's method are diagonally dominate, choose the stepping to be along the diagonal values.
+\begin{equation}
+x^{k+1}= D^{-1}((-L-U)*x^{k} +b)
+\end{equation}
+(source: http://www.maa.org/press/periodicals/loci/joma/iterative-methods-for-solving-iaxi-ibi-jacobis-method)
+
+The idea then is to begin stepping in x along the diagonal and with every step using the previous x values (starting with an initial guess) to eventually arrive at a value that converges. The following are the values produced by the source code. I double checked the values with the past assignment's methods and they matched almost perfectly. 
+\subsection{Results:}
+\begin{verbatim}
+RESULT:
+ A:
+ 71.000000  5.000000 17.000000 10.000000
+  5.000000 41.000000 12.000000  7.000000
+ 17.000000 12.000000 46.000000 24.000000
+ 10.000000  7.000000 24.000000 75.000000
+
+
+ B:
+  1.000000
+  0.000000
+  2.000000
+  1.000000
+
+
+ X:
+  0.004162
+ -0.013828
+  0.045865
+ -0.000608
+
+\end{verbatim}
+
+\subsection{B}
+The Gauss-Seidel method is actually very similar to Jacobi's method except that it directly uses the x values after they are found instead of iterating through the whole method then replacing the x values. It turns out that the iterations needed for this method were far fewer (two as opposed to six in Jacobi's method). The reason there weren't as many iterations needed is really in the nature the method was designed, to speed up the process of calculating the next x value. Below is the results I received from Jacobi and then also Gauss-Seidel.
+\subsection{Results:}
+\begin{verbatim}
+RESULT:
+ A:
+ 71.000000  5.000000 17.000000 10.000000
+  5.000000 41.000000 12.000000  7.000000
+ 17.000000 12.000000 46.000000 24.000000
+ 10.000000  7.000000 24.000000 75.000000
+
+
+ B:
+  1.000000
+  0.000000
+  2.000000
+  1.000000
+
+
+ X:
+  0.004162
+ -0.013828
+  0.045865
+ -0.000608
+
+ X2:
+  0.004162
+ -0.013828
+  0.045865
+ -0.000608
+
+\end{verbatim}
+\subsection{Problem 1 FORTRAN Source:}
+\fscript{A6}{FORTRAN Script for Jacobi and Gauss Seidel}
+%\lipsum[1]
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+%\lipsum[2]
+In this problem, a tri-diagonal matrix like the matrix below is given. Using one of the previous methods a solution can be easily found.
+
+
+
+\[
+A=
+\begin{bmatrix}
+5&2&\dots&0&0_{n}\\
+2&\ddots&\ddots&0&0\\
+0&\ddots&5&2&0\\
+0&0&2&5&2_{n-1}\\
+0&0&0&2_{n-1}&5_{n}\\
+
+\end{bmatrix}
+\]
+\[
+B=
+\begin{bmatrix}
+1\\
+1\\
+\vdots\\
+1\\
+1_{n}\\
+\end{bmatrix}
+\]
+
+I decided to run the two (where n=5) dimensional matrix through the previous assignment which included partial pivoting, complete pivoting, and Gaussian elimination. The results I received are below.
+\subsection{Results:}
+\begin{verbatim}
+RESULT:
+ A:
+  5.000000  2.000000  0.000000  0.000000  0.000000
+  2.000000  5.000000  2.000000  0.000000  0.000000
+  0.000000  2.000000  5.000000  2.000000  0.000000
+  0.000000  0.000000  2.000000  5.000000  2.000000
+  0.000000  0.000000  0.000000  2.000000  5.000000
+
+
+ B:
+  1.000000
+  1.000000
+  1.000000
+  1.000000
+  1.000000
+
+
+ A after TRIU call:
+  5.000000  2.000000  0.000000  0.000000  0.000000
+  0.000000  4.200000  2.000000  0.000000  0.000000
+  0.000000  0.000000  4.047619  2.000000  0.000000
+  0.000000  0.000000  0.000000  4.011765  2.000000
+  0.000000  0.000000  0.000000  0.000000  4.002933
+
+
+ X Values:
+  0.169231  0.076923  0.138462  0.076923  0.169231
+
+ Matrix for the PLU:
+  5.000000  2.000000  0.000000  0.000000  0.000000
+  0.400000  4.200000  2.000000  0.000000  0.000000
+  0.000000  0.476190  4.047619  2.000000  0.000000
+  0.000000  0.000000  0.494118  4.011765  2.000000
+  0.000000  0.000000  0.000000  0.498534  4.002933
+
+
+ X Values from PLU:
+  0.169231  0.076923  0.138462  0.076923  0.169231
+
+ Matrix for the FPLU:
+  5.000000  2.000000  0.000000  0.000000  0.000000
+  0.400000  4.200000  2.000000  0.000000  0.000000
+  0.000000  0.476190  4.047619  2.000000  0.000000
+  0.000000  0.000000  0.494118  4.011765  2.000000
+  0.000000  0.000000  0.000000  0.498534  4.002933
+
+
+ X Values from FPLU:
+  0.169231  0.076923  0.138462  0.076923  0.169231
+
+\end{verbatim}
+Included in the results is what the A matrix looks like in two dimensions. The next problem instructs not to use two dimensional matrices but to solve the same system of equations.
+\end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+This problem asks to solve the matrix from earlier using one of the iterative methods Jacobi or Gauss-Siedel but the problem further constrains the method to only using one dimensional vectors as opposed to a two dimensional matrix. \newline
+I felt that the most simple way to approach this problem was by Jacobi's method. Considering the matrix is diagonally dominate it seemed that stability would be no issue in this case.
+\subsection{Results:}
+ \begin{verbatim}
+RESULT:
+ X:
+  0.169231
+ AT:           1
+  0.076923
+ AT:           2
+  0.138462
+ AT:           3
+  0.076923
+ AT:           4
+  0.169231
+ AT:           5
+ \end{verbatim}
+ \end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+In the last problem, its asks for a solution to a similar looking equation that is 1,000,000 by 1,000,000 matrix which is actually too large to solve using a two dimensional matrix on any standard computer since double precision is needed that is 8 bytes per element that has to be allocated which would translate to roughly 8 TB of storage needed on RAM for just the matrix, not including the B and X values. However, many of those locations in a two dimensional matrix would be zero so by using only one dimensional matrices we can significantly reduce the amount of space needed. \newline
+The level of accuracy that the problem asked for was $1.0*10^{-9}$ which proved to be somewhat difficult to get, the highest precision I could get was $1.0*10^{-2}$ it is possible that the number of terms made it difficult to achieve the desired accuracy in a reasonable time. The results produced were interesting and not what I expected. The method didn't seem to converge to anything meaningful. The following values in the result are the specific component values at the requested positions.
+\subsection{Results:}
+\begin{verbatim}
+RESULT:
+ X:
+  0.000000
+  0.111111
+  0.111111
+  0.111111
+  0.111111
+\end{verbatim}
+\subsection{Problems 3-4 FORTRAN Source:}
+\fscript{P2_4}{FORTRAN Script to produce the matrices needed and attempt to solve}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

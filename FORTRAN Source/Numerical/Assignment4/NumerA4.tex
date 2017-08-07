@@ -1,0 +1,397 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{FORTRAN} % Load FORTRAN syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=FORTRAN, % Use FORTRAN in this template
+        frame=single, % Single frame around code        
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a FORTRAN script, the first parameter is the filename of the script (without .f95), the second parameter is the caption
+\newcommand{\fscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.f95}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Assignment\ \#4} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ October\ 31,\ 2016} % Due date
+\newcommand{\hmwkClass}{Numerical Analysis\ 4670} % Course/class
+\newcommand{\hmwkClassTime}{10:00am} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Glunt} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Michael Timbes} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+\section{Introduction}
+This homework assignment's goal is to explore the various methods of solving linear systems of equations. Problem one asks to solve by the prototype method, partial pivoting with Gauss Elimination, and then with complete pivoting with Gauss Elimination. The next problem asks to create a subroutine to calculate the Choleski Factorization of a symmetric matrix to determine if it is a positive definite matrix or not. The next problem asks if the given matrix from the first problem fits the criteria of positive definite and if so what the 'G' matrix would be. Finally, the last problem asks to find a way to determine if a matrix is positive definite if it is not symmetric- thus the Choleski Factorization may not be the best method to determine the definiteness.
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+Listing \ref{A4} shows the following program that will be referenced in problem 1.
+\subsection{A}
+The prototype method is based on simple Gaussian Elimination techniques. The idea is to create an upper triangular matrix from the original matrix by eliminating the entries below the diagonal. At line 115 the subroutine TRIU solves the matrix A and its corresponding B by Gauss Elimination.\newline
+\textit{Algorithm Outline TRIU:}
+\begin{itemize}
+\item Go from column 1:n.
+\item Go from row k+1:n.
+\item Store multiplier as a(i,k)/a(k,k).
+\item Go from j=1,n.
+\item Store the result of current value minus multiplier times current a(k,j) value (effectively creating a zero entry).
+\end{itemize}
+After the upper triangle is found from TRIU, the values are back substituted by first starting with the last coefficient in A(n,n) and solving the value of X(n) then using that value to solve the previous coefficients in A. Line 139 shows this process as discussed in class. \newline
+\textit{Algorithm Outline BackSolve:}
+\begin{itemize}
+\item Initial X(n) value equal to b(n) divided by a(n,n).
+\item Gather next B value.
+\item Subtract each component's contribution to the linear equation.
+\item Final X(i) value is the amount left from the subtraction divided by the diagonal value in a(i,i).
+\end{itemize}
+\subsection{B}
+The partial pivoting with Gauss Elimination involves finding the maximum number in the row at a diagonal matrix value, then switching the rows to have the maximum numbers in the diagonal. When the row swap is finished and a permutation matrix is made to reflect the row change, Gauss Elimination is done to create an upper triangular matrix and in the lower triangle, the various multipliers and permutation matrix are stored to later be used in back substitution by updating the B matrix to reflect the changes applied. \newline
+The reason for doing pivoting is for greater accuracy by limiting the need to have large multipliers because small number are being multiplied to get rid of larger numbers. Line 166 is the start of the subroutine that uses partial pivoting. \newline
+\textit{Algorithm Outline ParPLU:}
+\begin{itemize}
+\item Initialize Permutation matrix.
+\item Assume largest number is at diagonal position a(k,k).
+\item Check each value in rows below current 'k' row.
+\item If the value at a(i,k) is larger, store value and row location. Otherwise continue. 
+\item If the maximum value is at a future row,update permutation matrix with row information, swap rows.
+\item After potential row swap, continue with Gauss Elimination.
+\end{itemize}
+After the process of partial pivoting, a separate backwards substitution is needed with the addition of the permutation matrix. Line 204 begins the subroutine that solves the partial pivoting X matrix using B and P. \newline
+\textit{Algorithm Outline ParPLUSol:}
+\begin{itemize}
+\item Set a dummy variable Y equal to the B matrix. 
+\item Apply row swap information to the Y matrix to reflect row swaps in A matrix. 
+\item Apply Gauss elimination to the Y matrix using the multipliers in a(i,k).
+\item Begin with initial X(n) value like before, then subtract the matrix coefficients and solutions from earlier X values from the Y(i) value to find the X(i) (next) value. 
+\end{itemize}
+\subsection{C}
+Gaussian Elimination with complete pivoting where the column and rows could switch is very similar to the partial pivoting with some minor additions for the case of a column switch as well. Although not usually used because it is $O(n^2)$ complexity, it creates an even more accurate answer to the linear system of equations. Line 239 is the beginning of the FullPLU subroutine. \newline
+\textit{Algorithm Outline FullPLU:}
+\begin{itemize}
+\item Initialize Permutation matrix.
+\item Assume largest number is at diagonal position a(k,k).
+\item Check each value in rows below current 'k' row.
+\item If the value at a(i,k) is larger, store value and row location. Otherwise continue. 
+\item If the maximum value is at a future row,update permutation matrix with row information, swap rows.
+\item Reinitialize the max value variable and check the column values for the largest value after the potential row swap, store the largest column.
+\item If the maximum value is at a future column, swap column.(no permutation matrix is needed unless to check that LU equals A). 
+\item After potential row and column swap, continue with Gauss Elimination.
+\end{itemize}
+After the complete pivoting is used, the same function for partial pivoting solutions is used since the same basic idea applies in both pivot strategies. 
+\subsection{Comparison}
+\begin{verbatim}
+RESULT:
+ A after TRIU call:
+  7.000000  5.000000 17.000000 10.000000
+  0.000000  0.428571 -0.142857 -0.142857
+  0.000000  0.000000  4.666667 -0.333333
+  0.000000  0.000000  0.000000  0.642857
+
+
+ X Values:
+  3.777778 -2.111111 -0.222222 -1.111111
+
+ Matrix for the PLU:
+ 17.000000 12.000000 46.000000 24.000000
+  0.294118  0.470588 -1.529412 -0.058824
+  0.411765  0.125000 -3.250000  0.875000
+  0.588235 -0.125000  0.538462 -0.346154
+
+
+ X Values from PLU:
+  3.777778 -2.111111 -0.222222 -1.111111
+
+ Matrix for the FPLU:
+ 46.000000 24.000000 17.000000 12.000000
+  0.260870  0.739130  0.565217  0.869565
+  0.369565  1.529412 -0.764706 -2.176471
+  0.521739  3.352941  0.192308 -0.346154
+
+
+ X Values from FPLU:
+ -0.222222 -1.111111  3.777778 -2.111111
+
+\end{verbatim}
+The answers were the same out to six decimal places, past that the complete pivoting was seemingly more accurate but usually only four to six decimal places is sufficient for solutions. The complete pivoting is also not in the same order since there was not a permutation matrix applied to account for the column switching since the B matrix is only one column. 
+\fscript{A4}{FORTRAN(F95) Script for Problem 1(a-c)}
+
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Problem 2 in this report will also cover problems 3 and 4 as well for readability.
+\subsection{2}
+This problem asks to create a subroutine that computes the Choleski factorization of a given \textit{symmetric} matrix. The problem I chose was worked out and found to have the same matrix 'G' which represents the Choleski factorization matrix. \newline
+In order to find if a matrix is positive definite it must have a certain set of characteristics a few key characteristics are outlined below(can be found chapter 6.6 pgs.415-416 of the textbook). 
+\begin{itemize}
+\item $x^{t}Ax>0$
+\item $det(A)>0$
+\item For i=1,n $A(i,i) > 0$ (diagonal must be positive)
+\end{itemize}
+The characteristics above lead to a method of decomposition that is faster than an LU decomposition to solve a system of equations. With positive definitive matrices the identity $A=GG^{t}$ is used to help speed up finding solutions to a linear system. 
+\newline 
+In order for the identity to be true the sum of the components of G and its transpose must be result to the original matrix A which is slightly reminiscent of squaring a square root of the components down the diagonal and then to balance the factored matrix 'G', a variation of the Gauss elimination is performed with multipliers which also results in zeros in the upper triangle of G. Line 78 begins the $CHO\_F$ subroutine to find the factorization of A matrix. \newline  
+\textit{Algorithm Outline CHOF:}
+\begin{itemize}
+\item Start from $j:1,n$.
+\item Test if there is a negative or a zero at A(j,j).
+\item If the evaluation is false, take the square root of A(j,j), store in G(j,j).
+\item Do from $i:j+1,n.$
+\item Store the multiplier of A(i,j) divided by g(j,j).
+\item Do from $k:j+1,n$
+\item Gauss elimination at A(i,k) = A(i,k)- (G(i,j) times G(k,j))
+\end{itemize}
+To check the answer simply take the transpose and then multiply the two to see if the original matrix is the result(done at subroutine 'TPOSE').
+\begin{verbatim}
+ RESULT:
+ A:
+       9.000000      -3.000000       3.000000       9.000000
+      -3.000000      17.000000      -1.000000      -7.000000
+       3.000000      -1.000000      17.000000      15.000000
+       9.000000      -7.000000      15.000000      44.000000
+
+ G:
+   3.0000000000   0.0000000000   0.0000000000   0.0000000000
+  -1.0000000000   4.0000000000   0.0000000000   0.0000000000
+   1.0000000000   0.0000000000   4.0000000000   0.0000000000
+   3.0000000000  -1.0000000000   3.0000000000   5.0000000000
+
+ G^T:
+   3.0000000000  -1.0000000000   1.0000000000   3.0000000000
+   0.0000000000   4.0000000000   0.0000000000  -1.0000000000
+   0.0000000000   0.0000000000   4.0000000000   3.0000000000
+   0.0000000000   0.0000000000   0.0000000000   5.0000000000
+
+
+ G*G^T:
+   9.0000000000  -3.0000000000   3.0000000000   9.0000000000
+  -3.0000000000  17.0000000000  -1.0000000000  -7.0000000000
+   3.0000000000  -1.0000000000  17.0000000000  15.0000000000
+   9.0000000000  -7.0000000000  15.0000000000  44.0000000000
+
+ Positive Definite?
+ T
+
+\end{verbatim}
+\subsection{3}
+The same functions were used to find if the given matrix A is positive definite and what the resulting factorization is. 
+\begin{verbatim}
+RESULT:
+ A:
+       7.000000       5.000000      17.000000      10.000000
+       5.000000       4.000000      12.000000       7.000000
+      17.000000      12.000000      46.000000      24.000000
+      10.000000       7.000000      24.000000      15.000000
+
+ G:
+   2.6457513111   0.0000000000   0.0000000000   0.0000000000
+   1.8898223650   0.6546536707   0.0000000000   0.0000000000
+   6.4253960412  -0.2182178902   2.1602468995   0.0000000000
+   3.7796447301  -0.2182178902  -0.1543033500   0.8017837257
+
+ G^T:
+   2.6457513111   1.8898223650   6.4253960412   3.7796447301
+   0.0000000000   0.6546536707  -0.2182178902  -0.2182178902
+   0.0000000000   0.0000000000   2.1602468995  -0.1543033500
+   0.0000000000   0.0000000000   0.0000000000   0.8017837257
+
+
+ G*G^T:
+   7.0000000000   5.0000000000  17.0000000000  10.0000000000
+   5.0000000000   4.0000000000  12.0000000000   7.0000000000
+  17.0000000000  12.0000000000  46.0000000000  24.0000000000
+  10.0000000000   7.0000000000  24.0000000000  15.0000000000
+
+ Positive Definite?
+ T
+
+\end{verbatim}
+\subsection{4}
+This problem asks to write a subroutine that finds if a matrix that is unsymmetrical is positive definite. Using the characteristic that the diagonal can not have negatives, the subroutine 'PDEF' at line 127 checks only the diagonal of the matrix to see if there are numbers less than zero. The following is the example from problem 3 but with a negative down the diagonal. Even though I wrote a separate function to test the condition, the earlier call to CHO\_ F checks the same condition and outputs an error to the terminal.
+\begin{verbatim}
+mtimbes@mtimbes-VirtualBox:~/CompSci$ ./a.out
+ Size of matrix:
+           4
+  9.000000 -3.000000  3.000000  9.000000
+ -3.000000-17.000000 -1.000000 -7.000000
+  3.000000 -1.000000 17.000000 15.000000
+  9.000000 -7.000000 15.000000 44.000000
+ ERROR- SQRT OF A(J,J) NOT POSITIVE DEFINITE. END OF PROGRAM.
+
+\end{verbatim} 
+\fscript{A4_CFACT}{FORTRAN(F95) Script for Problems 2-4} 
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

@@ -1,0 +1,562 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{FORTRAN} % Load FORTRAN syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=FORTRAN, % Use FORTRAN in this template
+        frame=single, % Single frame around code        
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a FORTRAN script, the first parameter is the filename of the script (without .f95), the second parameter is the caption
+\newcommand{\fscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.f95}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Final Assignment} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ December\ 5,\ 2016} % Due date
+\newcommand{\hmwkClass}{Numerical Analysis\ 4670} % Course/class
+\newcommand{\hmwkClassTime}{10:00am} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Glunt} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Michael Timbes} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+%Listing \ref{a2p1} shows a FORTRAN script.
+In this problem I am asked to find the dominate eigenvalues using the power method. The power method works by "peeling off" coefficients of a vector that emerges from the product of the original matrix and the initial vector.
+\begin{equation}
+A*\textbf{x}^{t}=\textbf{y}^{t+1}
+\end{equation}
+The original matrix is A, the initial vector is the $\textbf{x}^{t}$ and the result if the $\textbf{y}^{t+1}$ vector. The next step is then to find a new $\textbf{x}^{t+1}$ vector by taking the infinity norm of the y vector, and then dividing the y vector by that value.
+\begin{equation}
+\textbf{x}^{t+1}=\frac{\textbf{y}^{t+1}}{\parallel \textbf{y} \parallel_{\infty}}
+\end{equation}
+Then test the next eigenvalue compared to the previous and see if there is a small difference which would mean convergence. Below are the results after running my implementation of the power method "EigPow".
+\begin{verbatim}
+V:
+  0.462516
+  1.000000
+  0.458367
+  0.832669
+  0.716117
+ --------------------------
+ Largest Eigenvalue: 
+ 23.240009
+
+\end{verbatim}
+\fscript{EigPow}{Eigen Value Approximation Routines}
+
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+This problem asks to find the eigenvalue of the least magnitude and its corresponding eigenvector using the inverse power method. The idea of the inverse power method is that if there is a greatest eigenvalue for a matrix then there should be a smallest that is the maximum of the original matrix's inverse. \newline
+The steps to the inverse power method are similar to the power method. The idea is actually to continue to solve the equation below for the y vector then use the maximum value of that y vector to make a new x vector that ideally better describes the eigenvalue we are looking for. 
+\begin{equation}
+\textbf{y}^{m}=\left(A-q\textbf{I}\right)^{-1}\textbf{x}^{m-1}
+\end{equation}
+To handle the inverse simply move it to the other side so that the equation is now
+\begin{equation}
+\left(A-q\textbf{I}\right)\textbf{y}^{m}=\textbf{x}^{m-1}.
+\end{equation}
+The only other additional step is finding the q value in the previous equation which is really the ideal number that we want to get close to. The q value is the initial approximation of the eigenvalue and can be approximated or by the following
+\begin{equation}
+q=\frac{\textbf{x}^{0t}(A\textbf{x}^{0})}{\textbf{x}^{0t}\textbf{x}^{0}}.
+\end{equation}
+Below are the results when I ran my implementation of the inverse power method.
+\begin{verbatim}
+Smallest Eig Vector:
+  0.226723
+  0.490194
+  0.224689
+  0.408169
+  0.351036
+ --------------------------
+ Eigenvalue: 
+ 23.240010
+
+\end{verbatim}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+In this question I am asked to find the smallest magnitude eigenvalue from a tridiagonal matrix of size (n=1000). My approach was to use the inverse power method like the last problem but with a twist. Instead of using a routine like partial pivoting I would use Jacobi's method to solve the matrices to find the new approximations for the eigenvectors. \newline
+I had one issue though, it seemed that the approximations were larger than the answer was. I believe it might have been because of the numbers being close together the inverse power method might have not been the best option. I would definitely consider another method that approximates all eigenvalues and then taken the minimum from that set. However, below are my results from the program.
+\begin{verbatim}
+RESULT:
+ X:
+  0.000010
+  0.000084
+  0.000367
+  0.001150
+  0.002896
+
+ Eig Val:
+  0.998700
+
+\end{verbatim}
+\fscript{EigPow2}{Different program for the tridiagonal matrix}
+\end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+%	PROBLEM EXC
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Below are the Octave scripts I wrote to help facilitate writing the Fortran programs and to check answers.
+\textbf{Main Program}
+\begin{verbatim}
+%Final Assignment for Numerical Analysis
+A=[1 2 3 4 5;2 6 7 8 9;3 7 0 1 2;4 8 1 10 1;5 9 2 1 5];
+%A=[-4 14 0;-5 13 0;-1 0 2];
+dumn=5;
+for i=1:dumn
+A2(i,i)=(2+(pow2(i)/power(dumn,4)));
+if(i<=dumn-1) 
+A2(i,i+1)=-1;
+A2(i+1,i)=-1;
+endif
+endfor
+%A=A2;
+N=size(A);
+N=N(1,:);
+x0=ones(N,1);
+
+system("cls");
+%%%%%%%%%%%%%%%%%%%%%%%%% First Problem %%%%%%%%%%%%%%%%%%%%%%%%% 
+%Take the original A matrix and the initial vector guess, then
+%multiply the two. Then redefine x (the initial vector) as x=result/max(result)
+%to normalize the result. Octave does this process in the background, and 
+%uses the maximum eigien approximation by default.
+disp("First Probelm: ")
+E=eig(A);
+[E_Vector,E_Diag]=eig(A);
+E_Max=max(E);
+E_Max
+
+%%%%%%%%%%%%%%%%%%%%%%%%% SECOND PROBLEM %%%%%%%%%%%%%%%%%%%%%%%%%
+%Once the power method has been applied, the inverse power method is used to
+%find the least eigen value. Since y^t = Ax^t then there is a similar vector in
+%terms of 'x' that is the smallest egien value which is equal to (A-(largest egien value)*I)*y^t.
+%%From this one can solve for the x value.
+%[x0,oldmul]=Einvpow(A,x0);
+%iterations = input("Max Iterations: ")
+iterations=15;
+mul2=0;
+%q value
+q=(x0.'*(A*x0))/(x0.'*x0);
+%Identity Matrix
+I=eye(N);
+%Form AQ
+AQ=A-(q*I);
+
+for i= 1:iterations
+mulold2=mul2;
+[x0,mul2]=Einvpow(x0,q,AQ);
+%disp("Current Xt:"),disp(x0);
+%disp("Current Mul:"),disp(mul)
+diffy= abs(mul2-mulold2);
+if(diffy<.00001)
+break;
+endif
+endfor
+disp("Second Probelm: ")
+disp("Eigenvalue Approximation: "),disp(mul2);
+disp("Iterations Needed: "),disp(i)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% THIRD PROBLEM %%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Here I am making the matrix as defined in the problem set.
+%It is tridiagonal, if the matrix is not already tridiagonal then 
+%consider performing a Householder transform. 
+n2=5;
+b2=ones(n2,1);
+x2=ones(n2,1);
+for i=1:n2
+a2d(i)=(2+(pow2(i)/power(n2,4)));
+endfor
+for i=1:n2-1
+a2l(i)=-1;
+a2u(i)=-1;
+endfor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tempv=x2;
+tempv(1)=a2d(1)+a2u(1);
+for i=2:n2
+if(i< n2)
+tempv(i)=(a2l(i-1)+a2d(i)+a2u(i));
+else 
+tempv(i)=a2d(i)+a2l(i-1);
+endif
+endfor
+q2=(x2.'*tempv)/(x2.'*x2);
+%a2d=a2d-q2;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+mul=0;
+iterations2=25;
+for i= 1:iterations2
+mulold=mul;
+[x2,mul]=Einvpow2(a2l,a2u,a2d,x2,q2);
+%disp("Current Xt:"),disp(x0);
+%disp("Current Mul:"),disp(mul)
+diffy= abs(mul-mulold);
+if(diffy<.00001)
+break;
+endif
+endfor
+disp("Third Probelm: ")
+disp("Eigenvalue Approximation: "),disp(mul);
+disp("Iterations Needed: "),disp(i)
+CD= eig(A2);
+%x2(1:10)
+%jac2(a2l,a2u,a2d,b2)
+%parpiv(A,b2)
+\end{verbatim}
+\textbf{Routine to Drive Inverse Power Method}
+\begin{verbatim}
+%Author: Michael Timbes
+%Function takes 4 arguments and returns two values
+%AQ = (A-qI)
+%q=x0.'*(A*x0)/(x0.'*x0)
+%xt is the most updated x^t column matrix
+%!!!!!!DEPENDENCIES: parpiv.m!!!!!!!!!!! 
+%parpiv.m solves linear equations with Gauss elimination and
+%partial (row) pivoting.
+function [xt,res] = Einvpow(xt,q,AQ) 
+res=0;
+y=parpiv(AQ,xt)
+[val,ipos]=max(abs(y));
+%disp("VAL"),disp(val)
+c=y(ipos)
+xt=1/c*y;
+res=q+(1/c);
+%disp("Second Probelm: "),disp(mul)
+endfunction
+\end{verbatim}
+\textbf{Routine to Solve Linear Systems Using Partial Pivoting }
+\begin{verbatim}
+%General Script for gaussian elimination with partial pivoting(row pivoting)
+%a=[71 5 17 10;5 41 12 7;17 12 46 24;10 7 24 75 ]; %Test matrix
+%b=[1; 0; 2; 1]; %Test matrix
+%input("Matrix A: ",a) 
+%input("Matrix B: ",b)
+function [x] = parpiv (a,b) 
+n=size(a); 
+n=n(1);
+x=zeros(n,1);
+system("cls");
+%Implement Gauss Elimination- Upper Triangularization
+p=ones(n);
+for k=1:n-1
+maxv= abs(a(k,k));
+maxr= k;
+for i = k+1:n
+if (abs(a(i,k)) >maxv)
+maxr=i;
+maxv= abs(a(i,k));
+endif
+endfor
+if(maxv==0)
+disp("Error, maxvalue is: "),disp(maxv)
+endif
+if(maxr > k)
+p(k) = maxr;
+temp = a(maxr,(k:n));
+a(maxr,(k:n)) = a(k,(k:n));
+a(k,(k:n)) = temp;
+endif
+%Multipliers Being stored in the array
+a(k+1:n,k) = a(k+1:n,k)/a(k,k);
+%Subtract off multipliers
+for i = k+1:n
+a(i,k+1:n) = a(i,k+1:n) - a(i,k)*a(k,k+1:n);
+endfor
+endfor
+%disp("A matrix POST"),disp(a)
+%Solving Ax=b for x. Back sub.
+y=b; %Set y to the function values
+for k= 1:n-1
+if(p(k) > k)
+s=y(k);
+y(k) = y(p(k));
+y(p(k)) = s;
+endif
+for i = k+1:n
+y(i) = y(i) - a(i,k)*y(k); %Back subsitution preparation, matching the row ops
+endfor
+endfor
+%Solve for coefficients
+if(a(n,n)!=0)
+x(n)=y(n)/(a(n,n));
+%disp("Initial X"),disp(x(n))
+else
+x(n)=0;
+endif
+i=n-1;
+do
+s=y(i);
+j=i;
+do
+j++;
+s=s-a(i,j)*x(j);
+until(j==n)
+x(i)=s/(a(i,i));
+i--;
+until(i==0)
+%disp("Resulting Matrix: "),disp(a) 
+%disp("Solution Matrix: "),disp(x) 
+endfunction
+\end{verbatim}
+\textbf{Routine to Drive Inverse Power Method for Tridiagonal Matrices}
+\begin{verbatim}
+%Author: Michael Timbes
+%Function takes 4 arguments and returns two values
+%AQ = (A-qI)
+%q=x0.'*(A*x0)/(x0.'*x0)
+%xt is the most updated x^t column matrix
+%!!!!!!DEPENDENCIES: jac2.m!!!!!!!!!!! 
+%jac2.m solves systems of tridiagonal symmetric matrices
+function [xt,res] = Einvpow2(a2l,a2u,a2d,xt,q) 
+res=0;
+[y]=jac2(a2l,a2u,a2d,xt);
+[val,ipos]=max(abs(y));
+%disp("VAL"),disp(val)
+c=y(ipos);
+xt=1/c*y;
+res=q+(1/c);
+%disp("Second Probelm: "),disp(mul)
+endfunction
+\end{verbatim}
+\textbf{Routine to Solve Tridiagonal Systems Using Jacobi's Method}
+\begin{verbatim}
+function[x]=jac2(l,u,d,b)
+%d=[  2.0400,  2.1600,  2.3600,  2.6400,  3.0000 ];
+%l=[ -1, -1, -1, -1 ];
+%u=[ -1, -1, -1, -1 ];
+%b=[ 1; 1; 1; 1; 1];
+v1=0;
+v2=0;
+tol=.000001;
+%SOLUTION:[  1.47395;2.00685;1.86085;1.38476;0.79492 ]
+n=size(d);
+n=n(2);
+itmax=50;
+
+x=zeros(1,n);
+xo=zeros(1,n);
+for k=1:itmax
+x(1) = (b(1)-(u(1)*x(2)))/d(1);
+%disp("First X:"),disp(x(1))
+for i= 2:n
+summ=0;
+summ = (l(i-1)*x(i-1)); 
+if(i < n)
+summ = summ+(u(i)*x(i+1));
+endif
+%disp("sum "),disp(summ),disp(i)
+x(i)=((b(i)-summ)/d(i));
+%disp("X:"),disp(x(i))
+xo(i)=x(i);
+endfor %end-i
+
+for i=1:n
+v1= v1+abs(pow2(xo(i)));
+v2= v2+abs(pow2(x(i)));
+endfor
+v1 =sqrt(v1);
+v2=sqrt(v2);
+difff=(abs(v2-v1));
+if( difff< tol)
+%disp(abs(v2-v1));
+else
+v1=0;
+v2=0;
+endif
+endfor %end-k
+%disp("Convergence Found at:"),disp(k)
+%disp("Solution: "),disp(x)
+
+
+
+endfunction
+\end{verbatim}
+
+\end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+
+\end{document}

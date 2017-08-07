@@ -1,0 +1,304 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{FORTRAN} % Load FORTRAN syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=FORTRAN, % Use FORTRAN in this template
+        frame=single, % Single frame around code        
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a FORTRAN script, the first parameter is the filename of the script (without .f95), the second parameter is the caption
+\newcommand{\fscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.f95}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Assignment\ \#3} % Assignment title
+\newcommand{\hmwkDueDate}{Friday,\ September\ 22,\ 2016} % Due date
+\newcommand{\hmwkClass}{Mathematics\ 4670} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Dr.Glunt} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Michael Timbes} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+In this problem, I have to find the vector version of the planar equation $x+y+2z=10$. Which results in $\vec{n}<1,1,2>$ and given the point, $P(1,2,1)$ I am asked to find the perpendicular distance. The following steps are how I approached the question and these steps serve as the basis for the FORTRAN program to follow.
+\begin{enumerate}
+\item First, find the normal vector and its magnitude given the planar equation.
+	\subitem  The normal vector $\vec{n}(1,1,2)$ is given by the planar equation's coefficients.
+	\subitem The magnitude is found by the following equation.
+	\begin{equation}
+	\parallel\vec{n}\parallel = \sqrt{x^{2} + y^{2} +z^{2}} = \sqrt{6}
+	\end{equation}
+\item Second, find a point on the plane(which I just set y and z equal to zero) and then make a vector $\vec{PQ}$ that goes through the points.
+	\subitem $P\left(1,2,1\right)$ and $Q\left(1,0,0\right)$ so that $\vec{PQ}= \left< 0,2,1\right>$
+\item The third step is to find the absolute value of the inner product of $\vec{PQ}$ and the normal vector of the plane. The equation for that is: $abs\left(\vec{PQ} \cdot \vec{n}\right)$
+\item Since the perpendicular distance between a point and a plane is the projection of a point on the plane to a point near the plane on to the normal of the plane in question, I will use that formula.
+\begin{equation}
+proj_{n}\vec{PQ}=\frac{abs\left(\vec{PQ} \cdot \vec{n}\right)}{\parallel\vec{n}\parallel} = \frac{4}{\sqrt{6}}
+\end{equation}
+\end{enumerate} 
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+In describing the reasoning behind the program I will begin with the variables that I decided to use. First, most of the variables are double precision. I have the arrays that are dynamic which I don't really need- I could have them fixed but I always aim to be as modular as I can when I write. There are two vectors: 'V' which is the planar vector(also the normal), 'PQ' which is the vector created joining 'P' and 'Q', and two points 'P' and 'Q'. The $V_x,y,z$ variables are the components of the 'V' vector and likewise with the 'P' components for the point. The 'DIST' is for the distance calculation,'D' for dimension,'I' just for an iterator, and the others are self explanatory.\newline
+Below the main are the three subroutines: FINDPQ,DOTPROD,and MAGV. The FindPQ is passed the points P and Q, PQ is passed to update its value,and D is passed to ensure no outside bounds errors occur. The PQ is found by subtracting each component of P from each component of Q to get a line. DOTPROD is passed PQ,V,DOTRESULT,and D, its function is to update DOTRESULT to reflect the absolute value of the inner product of PQ and V; the inner product is calculated by adding the product of the components of the two vectors. MAGV is passed V(for the normal),MAGNITUDE (to store the result), and D. The purpose of MAGV is to find the magnitude of the normal vector by add the square of each components and then taking the square root of the result.\newline
+\begin{homeworkProblem}
+\fscript{VECTORDIS}{Code for perpendicular distance}
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+When comparing the hand calculations with the FORTRAN code, both answers were the same. Below are a few more examples with various ranges for the points and the plane. 
+\begin{homeworkProblem}
+\begin{verbatim}
+TEST 1:
+
+INPUT PLANE VECTOR:           3 -D
+2 6 4
+ INPUT THE POINT           3 -D
+8 2 3
+ PLANE VECTOR:
+   2.0000000000000000        6.0000000000000000        4.0000000000000000     
+ POINT:
+   8.0000000000000000        2.0000000000000000        3.0000000000000000     
+ VECTOR PQ:
+   6.0000000000000000        2.0000000000000000        3.0000000000000000     
+ DOTPRODUCT:   36.000000000000000     
+ MAGNITUDE:   7.4833147735478827     
+ DISTANCE:   4.8107023544236389    
+
+TEST 2:
+ 
+INPUT PLANE VECTOR:           3 -D
+12 45 100
+ INPUT THE POINT           3 -D
+16 55 23
+ PLANE VECTOR:
+   12.000000000000000        45.000000000000000        100.00000000000000     
+ POINT:
+   16.000000000000000        55.000000000000000        23.000000000000000     
+ VECTOR PQ:
+   4.0000000000000000        55.000000000000000        23.000000000000000     
+ DOTPRODUCT:   4823.0000000000000     
+ MAGNITUDE:   110.31319050775387     
+ DISTANCE:   43.720972784854709     
+
+TEST 3:
+INPUT PLANE VECTOR:           3 -D
+20 48 123
+ INPUT THE POINT           3 -D
+200 465 11
+ PLANE VECTOR:
+   20.000000000000000        48.000000000000000        123.00000000000000     
+ POINT:
+   200.00000000000000        465.00000000000000        11.000000000000000     
+ VECTOR PQ:
+   180.00000000000000        465.00000000000000        11.000000000000000     
+ DOTPRODUCT:   27273.000000000000     
+ MAGNITUDE:   133.54025610279470     
+ DISTANCE:   204.23055036682109     
+
+TEST 4:
+INPUT PLANE VECTOR:           3 -D
+-1 -22 -6
+ INPUT THE POINT           3 -D
+1 23 24
+ PLANE VECTOR:
+  -1.0000000000000000       -22.000000000000000       -6.0000000000000000     
+ POINT:
+   1.0000000000000000        23.000000000000000        24.000000000000000     
+ VECTOR PQ:
+   2.0000000000000000        23.000000000000000        24.000000000000000     
+ DOTPRODUCT:   652.00000000000000     
+ MAGNITUDE:   22.825424421026653     
+ DISTANCE:   28.564638622858695     
+
+TEST 5:
+INPUT PLANE VECTOR:           3 -D
+2.555 12.465 .08
+ INPUT THE POINT           3 -D
+1 23.5 46.211
+ PLANE VECTOR:
+   2.5550000000000002        12.465000000000000        8.0000000000000002E-002
+ POINT:
+   1.0000000000000000        23.500000000000000        46.210999999999999     
+ VECTOR PQ:
+  -1.5550000000000002        23.500000000000000        46.210999999999999     
+ DOTPRODUCT:   292.65135500000002     
+ MAGNITUDE:   12.724411577750857     
+ DISTANCE:   22.999205362997895     
+
+
+\end{verbatim}
+\end{homeworkProblem}
+
+\end{document}
